@@ -1,0 +1,11 @@
+﻿ProductsAPI
+
+
+•	This API is developed using .NET Core 3.1
+•	It has the Repository Pattern to interact with the DB.
+•	It has the Open API specification using Swagger UI.
+•	It’s been secured using JWT Authentication Bearer Token which needs to be passed in the Header section.
+•	It has the Logging enabled globally with the Log4Net Provider which logs in disk.
+•	It’s using the SQLite database for storing the products and user info.
+•	It has the Health check enabled which shows the health of the API and the DB.
+•	It uses asynchronous calls to avoid blocking threads.
