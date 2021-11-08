@@ -13,6 +13,8 @@ using RefactorThis.Repository;
 using RefactorThis.Models;
 using RefactorThis.Providers;
 using RefactorThis.Extensions;
+using RefactorThis.Services;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace RefactorThis
 {
@@ -35,9 +37,12 @@ namespace RefactorThis
             services.AddScoped<IProductOptionsRepository<ProductOption>, ProductOptionsRepository<ApplicationDBContext>>();
 
             services.AddHealthChecks()
-                .AddDbContextCheck<ApplicationDBContext>();
+                .AddDbContextCheck<ApplicationDBContext>()
+                .AddApiHealth();
 
             services.AddControllers();
+
+            services.AddHttpContextAccessor();
 
             services.AddSwaggerGen(c =>
             {
@@ -61,6 +66,8 @@ namespace RefactorThis
             services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddSingleton<ILoggerManager, LoggerManager>();
+
+            services.AddHttpClient<IHealthCheck, ApiHealthCheck>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
